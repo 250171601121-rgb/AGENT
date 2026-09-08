@@ -68,8 +68,8 @@ video_id = get_video_id(query)
 if not video_id:
     return None
 
-return {
-    "status": "success",
-    "video_id": video_id,
-    "autoplay": True
-}
+return (
+    "https://www.youtube.com/embed/"
+    + video_id
+    + "?autoplay=1&mute=0"
+  )
