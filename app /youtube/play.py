@@ -6,14 +6,14 @@ import urllib.request
 def get_vid(query):
 
   try:
-    encoded = urlllib.parse.quote(query)
+    encoded = urllib.parse.quote(query)
 
     url = (
        "https://www.youtube.com/results"
         "?search_query=" + encoded
     )
     
-    request = uurllib.request.Request(
+    request = urllib.request.Request(
       url,
       headers={
         "User-Agent": "Mozilla/5.0"
