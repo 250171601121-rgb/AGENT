@@ -55,3 +55,21 @@ for pattern in patterns:
       pattern,
       text
     )
+
+if match:
+  
+        query = match.group(1)
+        break
+
+query = query.strip()
+
+video_id = get_video_id(query)
+
+if not video_id:
+    return None
+
+return {
+    "status": "success",
+    "video_id": video_id,
+    "autoplay": True
+}
