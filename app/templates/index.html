@@ -1,159 +1,636 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Nova AI</title>
 
 <style>
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+    box-sizing:border-box;
+}
+
 body{
     margin:0;
-    height:100vh;
-    display:grid;
-    place-items:center;
-    background:#09090b;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+
+    font-family:Arial, Helvetica, sans-serif;
     color:white;
-    font-family:Arial;
+
+    background:
+        radial-gradient(circle at 20% 20%, #34206d 0%, transparent 30%),
+        radial-gradient(circle at 80% 80%, #123b68 0%, transparent 30%),
+        #07070b;
 }
+
+
+/* Animated background */
+
+body::before,
+body::after{
+    content:"";
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.35;
+    animation:float 8s ease-in-out infinite alternate;
+}
+
+body::before{
+    background:#7c3aed;
+    top:-120px;
+    left:-100px;
+}
+
+body::after{
+    background:#06b6d4;
+    bottom:-150px;
+    right:-100px;
+    animation-delay:2s;
+}
+
+@keyframes float{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(60px,40px) scale(1.2);
+    }
+}
+
+
+/* =========================
+   MAIN CARD
+========================= */
 
 .card{
-    width:300px;
-    padding:35px;
+    position:relative;
+    z-index:2;
+
+    width:min(420px,90%);
+    padding:42px 32px;
+
     text-align:center;
-    background:#151518;
-    border:1px solid #333;
-    border-radius:25px;
+
+    background:rgba(20,20,28,.72);
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:30px;
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55),
+        inset 0 1px rgba(255,255,255,.08);
+
+    animation:cardAppear .8s ease;
 }
+
+@keyframes cardAppear{
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+    width:70px;
+    height:70px;
+
+    margin:0 auto 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:22px;
+
+    font-size:32px;
+
+    background:
+        linear-gradient(135deg,#7c3aed,#06b6d4);
+
+    box-shadow:
+        0 0 35px rgba(124,58,237,.45);
+
+    animation:logoGlow 3s infinite alternate;
+}
+
+@keyframes logoGlow{
+    from{
+        box-shadow:0 0 20px rgba(124,58,237,.35);
+    }
+    to{
+        box-shadow:0 0 45px rgba(6,182,212,.55);
+    }
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+h1{
+    margin:0;
+
+    font-size:34px;
+    font-weight:700;
+
+    letter-spacing:-1px;
+
+    background:linear-gradient(
+        90deg,
+        #ffffff,
+        #c4b5fd,
+        #67e8f9
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+    margin:10px 0 30px;
+
+    color:#9ca3af;
+    font-size:14px;
+}
+
+
+/* =========================
+   MICROPHONE
+========================= */
+
+.mic-wrapper{
+    position:relative;
+
+    width:160px;
+    height:160px;
+
+    margin:0 auto 25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+/* Outer rings */
+
+.ring{
+    position:absolute;
+
+    width:145px;
+    height:145px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(139,92,246,.3);
+
+    animation:pulse 3s infinite;
+}
+
+.ring:nth-child(2){
+    width:125px;
+    height:125px;
+    animation-delay:1s;
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(.85);
+        opacity:.8;
+    }
+
+    100%{
+        transform:scale(1.35);
+        opacity:0;
+    }
+}
+
+
+/* Microphone */
 
 .mic{
-    width:90px;
-    height:90px;
+    position:relative;
+    z-index:3;
+
+    width:100px;
+    height:100px;
+
     border:0;
     border-radius:50%;
-    font-size:35px;
+
     cursor:pointer;
+
+    font-size:38px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            145deg,
+            #8b5cf6,
+            #6366f1,
+            #06b6d4
+        );
+
+    box-shadow:
+        0 10px 35px rgba(99,102,241,.5);
+
+    transition:.3s;
 }
 
-.status{
-    margin-top:20px;
-    color:#aaa;
+.mic:hover{
+    transform:scale(1.08);
+
+    box-shadow:
+        0 15px 50px rgba(99,102,241,.7);
 }
 
-.song{
-    margin-top:10px;
-    font-size:13px;
+.mic:active{
+    transform:scale(.95);
 }
+
+.mic:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+
+/* Listening state */
 
 .listening{
-    transform:scale(1.1);
-    box-shadow:0 0 0 10px #ffffff18;
+    animation:
+        micPulse 1s infinite alternate;
+
+    box-shadow:
+        0 0 0 12px rgba(139,92,246,.15),
+        0 0 0 25px rgba(6,182,212,.08),
+        0 0 50px rgba(139,92,246,.8);
 }
+
+@keyframes micPulse{
+    from{
+        transform:scale(1);
+    }
+    to{
+        transform:scale(1.12);
+    }
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status{
+    min-height:24px;
+
+    margin-top:10px;
+
+    color:#d1d5db;
+
+    font-size:15px;
+
+    transition:.3s;
+}
+
+
+/* =========================
+   SONG DISPLAY
+========================= */
+
+.song-box{
+    margin-top:22px;
+
+    padding:14px 18px;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.07);
+
+    color:#c4b5fd;
+
+    font-size:14px;
+
+    min-height:20px;
+}
+
+
+/* =========================
+   WAVEFORM
+========================= */
+
+.wave{
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+
+    height:35px;
+
+    margin-top:20px;
+
+    opacity:.35;
+}
+
+.wave span{
+    width:4px;
+    height:10px;
+
+    border-radius:10px;
+
+    background:linear-gradient(
+        #8b5cf6,
+        #06b6d4
+    );
+
+    animation:wave 1s ease-in-out infinite;
+}
+
+.wave span:nth-child(2){
+    animation-delay:.1s;
+}
+
+.wave span:nth-child(3){
+    animation-delay:.2s;
+}
+
+.wave span:nth-child(4){
+    animation-delay:.3s;
+}
+
+.wave span:nth-child(5){
+    animation-delay:.4s;
+}
+
+.wave span:nth-child(6){
+    animation-delay:.3s;
+}
+
+.wave span:nth-child(7){
+    animation-delay:.2s;
+}
+
+.wave span:nth-child(8){
+    animation-delay:.1s;
+}
+
+@keyframes wave{
+    0%,100%{
+        height:8px;
+    }
+
+    50%{
+        height:30px;
+    }
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    margin-top:25px;
+
+    font-size:11px;
+
+    color:#6b7280;
+}
+
+.footer span{
+    color:#8b5cf6;
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="card">
 
-    <h2>Nova AI</h2>
-
-    <p>Say a song name</p>
-
-    <button id="mic" class="mic">
-        🎙️
-    </button>
-
-    <div id="status" class="status">
-        Tap microphone
+    <div class="logo">
+        ✨
     </div>
 
-    <div id="song" class="song"></div>
+    <h1>Nova AI</h1>
+
+    <div class="subtitle">
+        Your voice-powered music assistant
+    </div>
+
+
+    <!-- MICROPHONE -->
+
+    <div class="mic-wrapper">
+
+        <div class="ring"></div>
+        <div class="ring"></div>
+
+        <button id="mic" class="mic">
+            🎙️
+        </button>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div id="status" class="status">
+        Tap the microphone and say a song
+    </div>
+
+
+    <!-- SONG -->
+
+    <div id="song" class="song-box">
+        No song selected
+    </div>
+
+
+    <!-- WAVE -->
+
+    <div class="wave">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+    <div class="footer">
+        Powered by <span>Nova AI</span>
+    </div>
 
 </div>
 
+
+
 <script>
 
-const mic=document.getElementById("mic");
-const status=document.getElementById("status");
-const song=document.getElementById("song");
+const mic = document.getElementById("mic");
+const status = document.getElementById("status");
+const song = document.getElementById("song");
 
-const SpeechRecognition=
+
+const SpeechRecognition =
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
-let youtubeTab=null;
-let listening=false;
+
+let youtubeTab = null;
+let listening = false;
+
+
+
+/* =========================
+   CHECK SPEECH SUPPORT
+========================= */
 
 if(!SpeechRecognition){
 
-    status.textContent=
+    status.textContent =
         "Speech recognition unavailable";
 
-    mic.disabled=true;
+    mic.disabled = true;
 
 }else{
 
-    const recognition=
+    const recognition =
         new SpeechRecognition();
 
-    recognition.lang="en-US";
-    recognition.continuous=false;
-    recognition.interimResults=false;
 
-    recognition.onstart=()=>{
+    recognition.lang = "en-US";
 
-        listening=true;
+    recognition.continuous = false;
+
+    recognition.interimResults = false;
+
+
+    /* =========================
+       START LISTENING
+    ========================= */
+
+    recognition.onstart = () => {
+
+        listening = true;
 
         mic.classList.add("listening");
 
-        status.textContent=
-            "Listening...";
+        status.textContent =
+            "🎧 Listening...";
+
+        song.textContent =
+            "Speak the song name";
 
     };
 
-    recognition.onend=()=>{
 
-        listening=false;
+    /* =========================
+       STOP LISTENING
+    ========================= */
+
+    recognition.onend = () => {
+
+        listening = false;
 
         mic.classList.remove("listening");
 
     };
 
-    recognition.onerror=()=>{
 
-        listening=false;
+    /* =========================
+       ERROR
+    ========================= */
+
+    recognition.onerror = (event) => {
+
+        listening = false;
 
         mic.classList.remove("listening");
 
-        status.textContent="Try again";
+        console.error(event.error);
+
+        status.textContent =
+            "⚠️ Try again";
+
+        song.textContent =
+            "No song selected";
 
     };
 
-    recognition.onresult=async(event)=>{
 
-        const command=
+    /* =========================
+       RESULT
+    ========================= */
+
+    recognition.onresult = async (event) => {
+
+        const command =
             event.results[0][0]
             .transcript
             .trim();
 
+
         if(!command){
 
-            status.textContent=
+            status.textContent =
                 "No song detected";
 
             return;
 
         }
 
-        song.textContent=command;
 
-        status.textContent=
-            "Finding song...";
+        song.textContent =
+            "🎵 " + command;
+
+
+        status.textContent =
+            "🔎 Finding song...";
+
 
         try{
 
-            const response=
+            const response =
                 await fetch(
                     "/youtube/play",
                     {
@@ -161,7 +638,7 @@ if(!SpeechRecognition){
 
                         headers:{
                             "Content-Type":
-                                "application/json"
+                            "application/json"
                         },
 
                         body:JSON.stringify({
@@ -170,12 +647,14 @@ if(!SpeechRecognition){
                     }
                 );
 
-            const data=
+
+            const data =
                 await response.json();
+
 
             if(!data.success){
 
-                status.textContent=
+                status.textContent =
                     data.message ||
                     "Song not found";
 
@@ -183,10 +662,17 @@ if(!SpeechRecognition){
 
             }
 
-            if(!youtubeTab ||
-               youtubeTab.closed){
 
-                youtubeTab=
+            /* =========================
+               OPEN YOUTUBE
+            ========================= */
+
+            if(
+                !youtubeTab ||
+                youtubeTab.closed
+            ){
+
+                youtubeTab =
                     window.open(
                         data.url,
                         "NovaYouTube"
@@ -194,30 +680,39 @@ if(!SpeechRecognition){
 
             }else{
 
-                youtubeTab.location.href=
+                youtubeTab.location.href =
                     data.url;
 
                 youtubeTab.focus();
 
             }
 
-            status.textContent="Playing";
+
+            status.textContent =
+                "▶️ Playing on YouTube";
+
 
         }catch(error){
 
             console.error(error);
 
-            status.textContent=
-                "Server connection failed";
+            status.textContent =
+                "❌ Server connection failed";
 
         }
 
     };
 
-    mic.onclick=()=>{
+
+    /* =========================
+       MICROPHONE CLICK
+    ========================= */
+
+    mic.onclick = () => {
 
         if(listening)
             return;
+
 
         try{
 
@@ -236,4 +731,7 @@ if(!SpeechRecognition){
 </script>
 
 </body>
+
 </html>
+```
+
