@@ -5,71 +5,71 @@ import urllib.request
 
 def get_vid(query):
 
-  try:
-    encoded = urllib.parse.quote(query)
+    try:
+        encoded = urllib.parse.quote(query)
 
-    url = (
-       "https://www.youtube.com/results"
-        "?search_query=" + encoded
-    )
-    
-    request = urllib.request.Request(
-      url,
-      headers={
-        "User-Agent": "Mozilla/5.0"
-      }
-    )
+        url = (
+            "https://www.youtube.com/results"
+            "?search_query=" + encoded
+        )
 
-data = urllib.request.urlopen(
-  request,
-  timeout=5
-).read().decode("utf-8", errors="ignore")
+        request = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": "Mozilla/5.0"
+            }
+        )
 
- ids = re.findall(
-  r'"videoId":([^"]+)"',
-  data
- )
+        data = urllib.request.urlopen(
+            request,
+            timeout=5
+        ).read().decode("utf-8", errors="ignore")
 
- return ids[0] if ids else None
+        ids = re.findall(
+            r'"videoId":"([^"]+)"',
+            data
+        )
 
-except Exception:
-  return None 
+        return ids[0] if ids else None
+
+    except Exception:
+        return None
 
 
 def create_youtube_url(command):
-  
-command = text.lower().strip()
 
-patterns = [
-    r"play\s+song\s+(.+)",
-    r"play\s+music\s+(.+)",
-    r"play\s+(.+)",
-    r"youtube\s+(.+)"
-]
+    text = command.lower().strip()
 
-query = command
+    patterns = [
+        r"play\s+song\s+(.+)",
+        r"play\s+music\s+(.+)",
+        r"play\s+(.+)",
+        r"youtube\s+(.+)"
+    ]
 
-for pattern in patterns:
-  
-    match = re.search(
-      pattern,
-      text
+    query = command
+
+    for pattern in patterns:
+
+        match = re.search(
+            pattern,
+            text
+        )
+
+        if match:
+
+            query = match.group(1)
+            break
+
+    query = query.strip()
+
+    video_id = get_vid(query)
+
+    if not video_id:
+        return None
+
+    return (
+        "https://www.youtube.com/embed/"
+        + video_id
+        + "?autoplay=1&mute=0"
     )
-
-if match:
-  
-        query = match.group(1)
-        break
-
-query = query.strip()
-
-video_id = get_video_id(query)
-
-if not video_id:
-    return None
-
-return (
-    "https://www.youtube.com/embed/"
-    + video_id
-    + "?autoplay=1&mute=0"
-  )
