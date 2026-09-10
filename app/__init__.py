@@ -1,64 +1,89 @@
-import re
-import urllib.parse
+from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
+
+from app.gmail import (
+    is_email_command,
+    extract_email,
+    create_gmail_url,
+    generate_email_with_gemini
+)
+
+from app.youtube import youtube_bp
 
 
-def is_email_command(command):
-    """
-    Check whether the user's command is related to Gmail/email.
-    """
-    if not command:
-        return False
+def create_app():
 
-    command = command.lower()
+    app = Flask(__name__)
+    CORS(app)
 
-    keywords = [
-        "email",
-        "e-mail",
-        "gmail",
-        "send mail",
-        "send an email",
-        "write an email",
-        "compose email",
-        "compose an email",
-        "mail"
-    ]
-
-    return any(keyword in command for keyword in keywords)
-
-
-def extract_email(command):
-    """
-    Extract an email address from the user's command.
-    """
-    if not command:
-        return ""
-
-    match = re.search(
-        r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
-        command
+    # YouTube
+    app.register_blueprint(
+        youtube_bp,
+        url_prefix="/youtube"
     )
 
-    if match:
-        return match.group(0)
+    # Home
+    @app.route("/")
+    def home():
+        return render_template("index.html")
 
-    return ""
+    # HTML
+    @app.route("/html")
+    def html():
+        return render_template("index.html")
 
+    # Health
+    @app.route("/health")
+    def health():
+        return jsonify({
+            "status": "ok",
+            "service": "Nova AI Agent"
+        })
 
-def create_email_url(subject, body, recipient=""):
-    """
-    Create a Gmail compose URL.
-    """
+    # Gmail AI Agent
+    @app.route("/agent", methods=["POST"])
+    def agent():
 
-    params = urllib.parse.urlencode({
-        "view": "cm",
-        "fs": "1",
-        "to": recipient or "",
-        "su": subject or "",
-        "body": body or ""
-    })
+        try:
+            data = request.get_json(silent=True) or {}
+            command = data.get("command", "").strip()
 
-    return f"https://mail.google.com/mail/u/0/?{params}"
+            if not command:
+                return jsonify({
+                    "success": False,
+                    "message": "Command is required"
+                }), 400
 
+            if not is_email_command(command):
+                return jsonify({
+                    "success": False,
+                    "message": "Please give a Gmail command."
+                }), 400
 
-# Alias used by app/__init__.py
-create_gmail_url = create_email_url
+            recipient = extract_email(command)
+
+            email = generate_email_with_gemini(command)
+
+            gmail_url = create_gmail_url(
+                email["subject"],
+                email["body"],
+                recipient
+            )
+
+            return jsonify({
+                "success": True,
+                "type": "email",
+                "email_generated": True,
+                "recipient": recipient,
+                "subject": email["subject"],
+                "body": email["body"],
+                "gmail_url": gmail_url
+            })
+
+        except Exception as e:
+            return jsonify({
+                "success": False,
+                "message": str(e)
+            }), 500
+
+    return app
