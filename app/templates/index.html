@@ -3,20 +3,16 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Nova AI — Aashin Hamdhan</title>
-
+<title>Nova AI | Aashin Hamdhan</title>
 
 <style>
 
-/* =====================================================
+/* =========================================================
    RESET
-===================================================== */
+========================================================= */
 
 *{
     margin:0;
@@ -24,674 +20,581 @@
     box-sizing:border-box;
 }
 
-
-/* =====================================================
-   BODY
-===================================================== */
+html,body{
+    width:100%;
+    height:100%;
+}
 
 body{
-
-    min-height:100vh;
-
     overflow:hidden;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
     font-family:
         Arial,
         Helvetica,
         sans-serif;
-
     color:white;
+    background:#02030a;
+}
 
+
+/* =========================================================
+   ANIMATED BACKGROUND
+========================================================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
     background:
         radial-gradient(
-            circle at 15% 20%,
-            rgba(124,58,237,.30),
+            circle at 50% 45%,
+            rgba(80,50,180,.18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(0,200,255,.12),
             transparent 30%
         ),
-
-        radial-gradient(
-            circle at 85% 80%,
-            rgba(6,182,212,.25),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 50% 50%,
-            #151027,
-            #050509 70%
-        );
+        #02030a;
 }
 
 
-/* =====================================================
-   BACKGROUND ORBS
-===================================================== */
+/* Grid */
 
-.bg-orb{
-
+.grid{
     position:absolute;
+    inset:-50%;
+    width:200%;
+    height:200%;
 
-    border-radius:50%;
+    background-image:
+        linear-gradient(
+            rgba(120,120,255,.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(120,120,255,.055) 1px,
+            transparent 1px
+        );
 
-    filter:blur(80px);
+    background-size:55px 55px;
 
-    pointer-events:none;
-
-    opacity:.4;
+    transform:
+        perspective(500px)
+        rotateX(65deg);
 
     animation:
-        orbFloat 8s ease-in-out infinite alternate;
+        gridMove 12s linear infinite;
+}
+
+@keyframes gridMove{
+
+    from{
+        transform:
+            perspective(500px)
+            rotateX(65deg)
+            translateY(0);
+    }
+
+    to{
+        transform:
+            perspective(500px)
+            rotateX(65deg)
+            translateY(55px);
+    }
 }
 
 
-.orb-one{
+/* =========================================================
+   GLOWING ORBS
+========================================================= */
 
-    width:250px;
-    height:250px;
-
-    background:#7c3aed;
-
-    top:-80px;
-    left:-80px;
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.35;
+    animation:orbFloat 10s ease-in-out infinite alternate;
 }
 
+.orb1{
+    width:350px;
+    height:350px;
+    background:#6d28d9;
+    left:-150px;
+    top:-150px;
+}
 
-.orb-two{
-
-    width:220px;
-    height:220px;
-
-    background:#06b6d4;
-
-    bottom:-70px;
-    right:-60px;
-
+.orb2{
+    width:300px;
+    height:300px;
+    background:#0891b2;
+    right:-120px;
+    bottom:-120px;
     animation-delay:2s;
 }
 
-
-.orb-three{
-
-    width:140px;
-    height:140px;
-
-    background:#ec4899;
-
-    top:45%;
-    right:5%;
-
+.orb3{
+    width:180px;
+    height:180px;
+    background:#db2777;
+    right:15%;
+    top:5%;
     animation-delay:4s;
 }
-
 
 @keyframes orbFloat{
 
     0%{
-
-        transform:
-            translate(0,0)
-            scale(1);
-
+        transform:translate(0,0) scale(1);
     }
 
     100%{
-
         transform:
-            translate(50px,-30px)
-            scale(1.2);
-
+            translate(70px,-40px)
+            scale(1.25);
     }
-
 }
 
 
-/* =====================================================
+/* =========================================================
    PARTICLES
-===================================================== */
+========================================================= */
 
 .particles{
-
     position:absolute;
-
     inset:0;
-
-    overflow:hidden;
-
-    pointer-events:none;
 }
 
-
 .particles span{
-
     position:absolute;
 
-    width:3px;
-    height:3px;
+    width:2px;
+    height:2px;
 
+    background:white;
     border-radius:50%;
-
-    background:#fff;
 
     opacity:.5;
 
     animation:
-        particleMove
-        linear
-        infinite;
+        particle linear infinite;
 }
-
 
 .particles span:nth-child(1){
-    left:10%;
-    top:80%;
-    animation-duration:8s;
-}
-
-.particles span:nth-child(2){
-    left:20%;
-    top:60%;
-    animation-duration:11s;
-}
-
-.particles span:nth-child(3){
-    left:35%;
-    top:90%;
-    animation-duration:9s;
-}
-
-.particles span:nth-child(4){
-    left:50%;
-    top:70%;
-    animation-duration:13s;
-}
-
-.particles span:nth-child(5){
-    left:65%;
-    top:85%;
-    animation-duration:10s;
-}
-
-.particles span:nth-child(6){
-    left:80%;
-    top:60%;
+    left:5%;
     animation-duration:12s;
 }
 
-.particles span:nth-child(7){
-    left:90%;
-    top:85%;
-    animation-duration:9s;
+.particles span:nth-child(2){
+    left:12%;
+    animation-duration:16s;
 }
 
-.particles span:nth-child(8){
-    left:45%;
-    top:50%;
+.particles span:nth-child(3){
+    left:22%;
+    animation-duration:10s;
+}
+
+.particles span:nth-child(4){
+    left:34%;
+    animation-duration:14s;
+}
+
+.particles span:nth-child(5){
+    left:47%;
+    animation-duration:18s;
+}
+
+.particles span:nth-child(6){
+    left:58%;
+    animation-duration:11s;
+}
+
+.particles span:nth-child(7){
+    left:70%;
     animation-duration:15s;
 }
 
-
-@keyframes particleMove{
-
-    0%{
-
-        transform:
-            translateY(100px);
-
-        opacity:0;
-
-    }
-
-    20%{
-
-        opacity:.6;
-
-    }
-
-    80%{
-
-        opacity:.6;
-
-    }
-
-    100%{
-
-        transform:
-            translateY(-700px);
-
-        opacity:0;
-
-    }
-
+.particles span:nth-child(8){
+    left:82%;
+    animation-duration:13s;
 }
 
-
-/* =====================================================
-   MAIN CARD
-===================================================== */
-
-.card{
-
-    position:relative;
-
-    z-index:10;
-
-    width:
-        min(450px,92%);
-
-    padding:
-        40px 30px 30px;
-
-    text-align:center;
-
-    border-radius:32px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(30,27,50,.85),
-            rgba(10,10,18,.80)
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.13);
-
-    backdrop-filter:
-        blur(30px);
-
-    -webkit-backdrop-filter:
-        blur(30px);
-
-    box-shadow:
-
-        0 30px 100px
-        rgba(0,0,0,.65),
-
-        inset
-        0 1px
-        rgba(255,255,255,.08);
-
-    animation:
-        cardIn .9s ease;
+.particles span:nth-child(9){
+    left:92%;
+    animation-duration:17s;
 }
 
-
-@keyframes cardIn{
+@keyframes particle{
 
     from{
-
+        transform:translateY(110vh);
         opacity:0;
+    }
 
-        transform:
-            translateY(40px)
-            scale(.92);
+    15%{
+        opacity:.6;
+    }
 
+    85%{
+        opacity:.6;
     }
 
     to{
-
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
+        transform:translateY(-10vh);
+        opacity:0;
     }
-
 }
 
 
-/* =====================================================
-   TOP LABEL
-===================================================== */
+/* =========================================================
+   MAIN INTERFACE
+========================================================= */
 
-.top-label{
+.interface{
+    position:relative;
+    z-index:5;
 
-    display:inline-flex;
+    width:100%;
+    height:100%;
 
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar{
+    position:absolute;
+    top:25px;
+
+    width:min(900px,90%);
+
+    display:flex;
+    justify-content:space-between;
     align-items:center;
 
-    gap:7px;
+    padding:12px 18px;
 
-    padding:
-        7px 13px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:18px;
 
-    margin-bottom:18px;
+    background:rgba(10,10,20,.45);
 
-    border-radius:30px;
+    backdrop-filter:blur(20px);
 
-    font-size:11px;
-
-    letter-spacing:1px;
-
-    text-transform:uppercase;
-
-    color:#c4b5fd;
-
-    background:
-        rgba(139,92,246,.10);
-
-    border:
-        1px solid
-        rgba(139,92,246,.20);
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.3);
 }
 
+.system{
+    display:flex;
+    align-items:center;
+    gap:9px;
 
-.top-dot{
+    font-size:11px;
+    letter-spacing:2px;
+    color:#a5b4fc;
+}
 
-    width:7px;
-    height:7px;
+.online{
+    width:8px;
+    height:8px;
 
     border-radius:50%;
 
     background:#22c55e;
 
     box-shadow:
-        0 0 10px
-        #22c55e;
+        0 0 15px #22c55e;
 
-    animation:
-        blink 1.5s infinite;
+    animation:blink 1.5s infinite;
 }
 
-
 @keyframes blink{
-
-    0%,100%{
-        opacity:1;
-    }
 
     50%{
         opacity:.3;
     }
+}
 
+.clock{
+    font-size:12px;
+    color:#94a3b8;
 }
 
 
-/* =====================================================
-   LOGO
-===================================================== */
+/* =========================================================
+   BRAND
+========================================================= */
 
-.logo{
-
-    width:78px;
-    height:78px;
-
-    margin:
-        0 auto 18px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:24px;
-
-    font-size:36px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #7c3aed,
-            #6366f1,
-            #06b6d4
-        );
-
-    box-shadow:
-
-        0 0 25px
-        rgba(124,58,237,.45),
-
-        0 0 60px
-        rgba(6,182,212,.15);
-
-    animation:
-        logoPulse 3s ease-in-out infinite;
+.brand{
+    text-align:center;
+    margin-bottom:5px;
 }
 
+.brand small{
+    display:block;
 
-@keyframes logoPulse{
+    font-size:10px;
+    letter-spacing:5px;
 
-    0%,100%{
+    color:#818cf8;
 
-        transform:
-            translateY(0);
-
-        box-shadow:
-            0 0 25px
-            rgba(124,58,237,.45);
-
-    }
-
-    50%{
-
-        transform:
-            translateY(-5px);
-
-        box-shadow:
-            0 0 50px
-            rgba(6,182,212,.5);
-
-    }
-
+    margin-bottom:7px;
 }
 
-
-/* =====================================================
-   TITLE
-===================================================== */
-
-h1{
-
-    font-size:38px;
-
-    letter-spacing:-1.5px;
+.brand h1{
+    font-size:48px;
 
     font-weight:800;
+
+    letter-spacing:-2px;
 
     background:
         linear-gradient(
             90deg,
-            #ffffff,
-            #c4b5fd,
-            #67e8f9
+            #fff,
+            #a78bfa,
+            #67e8f9,
+            #fff
         );
 
-    -webkit-background-clip:text;
+    background-size:250%;
 
-    -webkit-text-fill-color:
-        transparent;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation:
+        gradientText 5s linear infinite;
 }
 
+@keyframes gradientText{
 
-/* =====================================================
-   CREATED BY
-===================================================== */
+    to{
+        background-position:250%;
+    }
+}
 
 .creator{
-
-    margin-top:9px;
-
-    font-size:14px;
-
-    color:#9ca3af;
-}
-
-
-.creator strong{
-
-    color:#67e8f9;
-
-    font-weight:700;
-
-    text-shadow:
-        0 0 15px
-        rgba(103,232,249,.45);
-}
-
-
-/* =====================================================
-   SUBTITLE
-===================================================== */
-
-.subtitle{
-
-    margin:
-        10px 0 25px;
+    margin-top:8px;
 
     font-size:13px;
 
-    color:#6b7280;
+    color:#64748b;
+}
 
-    letter-spacing:.3px;
+.creator strong{
+    color:#67e8f9;
+
+    text-shadow:
+        0 0 15px
+        rgba(103,232,249,.4);
 }
 
 
-/* =====================================================
+/* =========================================================
    AI CORE
-===================================================== */
+========================================================= */
 
-.ai-core{
-
+.ai{
     position:relative;
 
-    width:200px;
-    height:200px;
+    width:330px;
+    height:330px;
 
-    margin:
-        0 auto 20px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
+    margin:10px auto;
 }
 
 
-/* Outer rotating ring */
+/* Outer ring */
 
-.core-ring{
-
+.ring{
     position:absolute;
 
-    width:190px;
-    height:190px;
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
 
     border-radius:50%;
 
-    border:
-        1px solid
-        rgba(139,92,246,.30);
+    border:1px solid rgba(139,92,246,.3);
 
-    border-top-color:
-        #8b5cf6;
+    pointer-events:none;
+}
 
-    border-right-color:
-        #06b6d4;
+.ring1{
+    width:320px;
+    height:320px;
+
+    border-top-color:#8b5cf6;
+    border-right-color:#06b6d4;
+
+    animation:
+        rotate 7s linear infinite;
+}
+
+.ring2{
+    width:285px;
+    height:285px;
+
+    border-style:dashed;
+
+    border-color:rgba(103,232,249,.25);
+
+    animation:
+        rotateReverse 11s linear infinite;
+}
+
+.ring3{
+    width:250px;
+    height:250px;
+
+    border-left-color:#ec4899;
+    border-bottom-color:#8b5cf6;
 
     animation:
         rotate 5s linear infinite;
 }
 
+@keyframes rotate{
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
+    }
+}
 
-.core-ring-two{
+@keyframes rotateReverse{
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(-360deg);
+    }
+}
 
+
+/* =========================================================
+   ENERGY DOTS
+========================================================= */
+
+.energy{
     position:absolute;
 
-    width:165px;
-    height:165px;
+    inset:0;
+
+    animation:
+        rotate 9s linear infinite;
+}
+
+.energy i{
+    position:absolute;
+
+    width:7px;
+    height:7px;
 
     border-radius:50%;
 
-    border:
-        1px dashed
-        rgba(103,232,249,.35);
+    background:#67e8f9;
 
-    animation:
-        rotateReverse 8s linear infinite;
+    box-shadow:
+        0 0 15px #67e8f9;
+}
+
+.energy i:nth-child(1){
+    top:2px;
+    left:50%;
+}
+
+.energy i:nth-child(2){
+    right:5px;
+    top:50%;
+}
+
+.energy i:nth-child(3){
+    bottom:2px;
+    left:50%;
+}
+
+.energy i:nth-child(4){
+    left:5px;
+    top:50%;
 }
 
 
-@keyframes rotate{
-
-    to{
-        transform:
-            rotate(360deg);
-    }
-
-}
-
-
-@keyframes rotateReverse{
-
-    to{
-        transform:
-            rotate(-360deg);
-    }
-
-}
-
-
-/* =====================================================
+/* =========================================================
    CORE GLOW
-===================================================== */
+========================================================= */
 
 .core-glow{
-
     position:absolute;
 
-    width:135px;
-    height:135px;
+    left:50%;
+    top:50%;
+
+    width:190px;
+    height:190px;
+
+    transform:
+        translate(-50%,-50%);
 
     border-radius:50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(139,92,246,.40),
-            rgba(6,182,212,.12),
+            rgba(139,92,246,.5),
+            rgba(6,182,212,.2),
             transparent 70%
         );
 
-    filter:blur(8px);
+    filter:blur(15px);
 
     animation:
         coreGlow 2s ease-in-out infinite alternate;
 }
 
-
 @keyframes coreGlow{
 
     from{
-        transform:scale(.9);
+        transform:
+            translate(-50%,-50%)
+            scale(.85);
     }
 
     to{
-        transform:scale(1.15);
+        transform:
+            translate(-50%,-50%)
+            scale(1.2);
     }
-
 }
 
 
-/* =====================================================
-   MICROPHONE
-===================================================== */
+/* =========================================================
+   MICROPHONE BUTTON
+========================================================= */
 
 .mic{
+    position:absolute;
 
-    position:relative;
+    z-index:10;
 
-    z-index:5;
+    left:50%;
+    top:50%;
 
-    width:105px;
-    height:105px;
+    transform:
+        translate(-50%,-50%);
+
+    width:135px;
+    height:135px;
 
     border:none;
 
@@ -699,237 +602,132 @@ h1{
 
     cursor:pointer;
 
-    font-size:40px;
+    font-size:48px;
 
     color:white;
 
     background:
-        linear-gradient(
-            145deg,
-            #8b5cf6,
-            #6366f1,
-            #06b6d4
+        radial-gradient(
+            circle at 35% 25%,
+            #a78bfa,
+            #6366f1 45%,
+            #0891b2
         );
 
     box-shadow:
 
-        0 10px 35px
-        rgba(99,102,241,.45),
+        0 0 25px
+        rgba(99,102,241,.6),
 
-        inset
-        0 1px
-        rgba(255,255,255,.25);
+        0 0 70px
+        rgba(6,182,212,.25),
+
+        inset 0 2px
+        rgba(255,255,255,.35);
 
     transition:
-        transform .25s,
-        box-shadow .25s;
+        .3s;
 }
-
 
 .mic:hover{
 
     transform:
+        translate(-50%,-50%)
         scale(1.08);
 
     box-shadow:
 
-        0 15px 55px
-        rgba(99,102,241,.75),
+        0 0 40px
+        rgba(139,92,246,.9),
 
-        0 0 30px
+        0 0 100px
         rgba(6,182,212,.35);
 }
-
 
 .mic:active{
 
     transform:
-        scale(.94);
+        translate(-50%,-50%)
+        scale(.95);
 }
-
 
 .mic:disabled{
-
-    opacity:.5;
-
-    cursor:
-        not-allowed;
+    opacity:.4;
+    cursor:not-allowed;
 }
 
 
-/* =====================================================
+/* =========================================================
    LISTENING
-===================================================== */
+========================================================= */
 
 .listening{
 
     animation:
-        listeningPulse
-        .8s ease-in-out
+        listening 700ms
+        ease-in-out
         infinite alternate;
-
-    box-shadow:
-
-        0 0 0 12px
-        rgba(139,92,246,.15),
-
-        0 0 0 25px
-        rgba(6,182,212,.10),
-
-        0 0 70px
-        rgba(139,92,246,.9);
 }
 
-
-@keyframes listeningPulse{
+@keyframes listening{
 
     from{
 
         transform:
+            translate(-50%,-50%)
             scale(1);
+
+        box-shadow:
+            0 0 30px
+            rgba(139,92,246,.8);
 
     }
 
     to{
 
         transform:
-            scale(1.13);
+            translate(-50%,-50%)
+            scale(1.15);
 
+        box-shadow:
+
+            0 0 30px
+            #8b5cf6,
+
+            0 0 80px
+            #06b6d4,
+
+            0 0 130px
+            rgba(139,92,246,.35);
     }
-
 }
 
 
-/* =====================================================
+/* =========================================================
    STATUS
-===================================================== */
+========================================================= */
 
 .status{
+    margin-top:5px;
 
     min-height:25px;
 
-    font-size:15px;
-
-    color:#d1d5db;
-
-    transition:
-        .3s;
-}
-
-
-/* =====================================================
-   SONG CARD
-===================================================== */
-
-.song-card{
-
-    margin-top:20px;
-
-    padding:
-        15px 17px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:13px;
-
-    text-align:left;
-
-    border-radius:18px;
-
-    background:
-        rgba(255,255,255,.045);
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    box-shadow:
-        inset 0 1px
-        rgba(255,255,255,.03);
-
-    transition:
-        .3s;
-}
-
-
-.song-card:hover{
-
-    background:
-        rgba(255,255,255,.07);
-
-    transform:
-        translateY(-2px);
-}
-
-
-.music-icon{
-
-    width:42px;
-    height:42px;
-
-    flex-shrink:0;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:13px;
-
-    font-size:19px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(124,58,237,.35),
-            rgba(6,182,212,.25)
-        );
-}
-
-
-.song-info{
-
-    min-width:0;
-}
-
-
-.song-label{
-
-    font-size:10px;
-
-    color:#6b7280;
-
-    text-transform:uppercase;
-
-    letter-spacing:1px;
-
-    margin-bottom:4px;
-}
-
-
-.song{
-
-    color:#e5e7eb;
+    text-align:center;
 
     font-size:14px;
 
-    overflow:hidden;
+    color:#cbd5e1;
 
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
+    letter-spacing:.3px;
 }
 
 
-/* =====================================================
-   WAVEFORM
-===================================================== */
+/* =========================================================
+   VISUALIZER
+========================================================= */
 
-.wave{
-
-    height:38px;
+.visualizer{
+    height:50px;
 
     display:flex;
 
@@ -939,15 +737,12 @@ h1{
 
     gap:4px;
 
-    margin-top:18px;
-
-    opacity:.45;
+    margin-top:5px;
 }
 
+.visualizer span{
 
-.wave span{
-
-    width:3px;
+    width:4px;
 
     height:8px;
 
@@ -960,142 +755,250 @@ h1{
         );
 
     animation:
-        wave 1s
-        ease-in-out
-        infinite;
+        bars 1s
+        ease-in-out infinite;
 }
 
-
-.wave span:nth-child(2){
+.visualizer span:nth-child(1){
     animation-delay:.1s;
 }
 
-.wave span:nth-child(3){
+.visualizer span:nth-child(2){
     animation-delay:.2s;
 }
 
-.wave span:nth-child(4){
+.visualizer span:nth-child(3){
     animation-delay:.3s;
 }
 
-.wave span:nth-child(5){
+.visualizer span:nth-child(4){
     animation-delay:.4s;
 }
 
-.wave span:nth-child(6){
+.visualizer span:nth-child(5){
     animation-delay:.5s;
 }
 
-.wave span:nth-child(7){
+.visualizer span:nth-child(6){
     animation-delay:.4s;
 }
 
-.wave span:nth-child(8){
+.visualizer span:nth-child(7){
     animation-delay:.3s;
 }
 
-.wave span:nth-child(9){
+.visualizer span:nth-child(8){
     animation-delay:.2s;
 }
 
-.wave span:nth-child(10){
+.visualizer span:nth-child(9){
     animation-delay:.1s;
 }
 
-
-@keyframes wave{
+@keyframes bars{
 
     0%,100%{
-
         height:7px;
-
     }
 
     50%{
-
-        height:32px;
-
+        height:38px;
     }
-
 }
 
 
-/* =====================================================
+/* =========================================================
+   NOW PLAYING
+========================================================= */
+
+.now-playing{
+
+    width:min(480px,90%);
+
+    margin-top:3px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:14px 17px;
+
+    border-radius:20px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    background:
+        rgba(10,10,20,.55);
+
+    backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.3);
+
+    transition:
+        .3s;
+}
+
+.now-playing:hover{
+
+    border-color:
+        rgba(139,92,246,.35);
+
+    transform:
+        translateY(-3px);
+}
+
+
+.album{
+
+    position:relative;
+
+    width:52px;
+    height:52px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    font-size:22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #0891b2
+        );
+
+    box-shadow:
+        0 0 25px
+        rgba(124,58,237,.3);
+}
+
+.album::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:#02030a;
+
+    border:2px solid rgba(255,255,255,.5);
+}
+
+
+.track-info{
+    min-width:0;
+    flex:1;
+}
+
+.track-label{
+
+    font-size:9px;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    color:#64748b;
+
+    margin-bottom:5px;
+}
+
+.song{
+
+    font-size:14px;
+
+    color:#e2e8f0;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
    FOOTER
-===================================================== */
+========================================================= */
 
 .footer{
 
-    margin-top:22px;
+    position:absolute;
 
-    padding-top:17px;
+    bottom:22px;
 
-    border-top:
-        1px solid
-        rgba(255,255,255,.06);
+    font-size:10px;
 
-    color:#555b68;
+    letter-spacing:1px;
 
-    font-size:11px;
+    color:#475569;
 }
 
-
 .footer strong{
-
     color:#8b5cf6;
 }
 
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-@media(max-width:500px){
+@media(max-width:600px){
 
-    .card{
-
-        padding:
-            30px 20px 25px;
-
+    .topbar{
+        top:15px;
     }
 
-
-    h1{
-
-        font-size:32px;
-
+    .brand h1{
+        font-size:38px;
     }
 
-
-    .ai-core{
-
-        width:175px;
-        height:175px;
-
+    .ai{
+        width:270px;
+        height:270px;
     }
 
-
-    .core-ring{
-
-        width:170px;
-        height:170px;
-
+    .ring1{
+        width:260px;
+        height:260px;
     }
 
-
-    .core-ring-two{
-
-        width:145px;
-        height:145px;
-
+    .ring2{
+        width:230px;
+        height:230px;
     }
 
+    .ring3{
+        width:205px;
+        height:205px;
+    }
 
     .mic{
+        width:110px;
+        height:110px;
+        font-size:40px;
+    }
 
-        width:95px;
-        height:95px;
-
+    .core-glow{
+        width:155px;
+        height:155px;
     }
 
 }
@@ -1108,99 +1011,120 @@ h1{
 <body>
 
 
-<!-- =================================================
+<!-- =========================================================
      BACKGROUND
-================================================== -->
+========================================================= -->
 
-<div class="bg-orb orb-one"></div>
+<div class="background">
 
-<div class="bg-orb orb-two"></div>
+    <div class="grid"></div>
 
-<div class="bg-orb orb-three"></div>
+    <div class="orb orb1"></div>
+
+    <div class="orb orb2"></div>
+
+    <div class="orb orb3"></div>
 
 
-<div class="particles">
+    <div class="particles">
 
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
 
 </div>
 
 
 
-<!-- =================================================
-     MAIN NOVA AI
-================================================== -->
+<!-- =========================================================
+     NOVA INTERFACE
+========================================================= -->
 
-<div class="card">
-
-
-    <!-- ONLINE LABEL -->
-
-    <div class="top-label">
-
-        <span class="top-dot"></span>
-
-        NOVA SYSTEM ONLINE
-
-    </div>
+<div class="interface">
 
 
-    <!-- LOGO -->
+    <!-- TOP BAR -->
 
-    <div class="logo">
+    <div class="topbar">
 
-        ✨
+        <div class="system">
 
-    </div>
+            <span class="online"></span>
 
+            NOVA SYSTEM ONLINE
 
-    <!-- TITLE -->
+        </div>
 
-    <h1>
-        Nova AI
-    </h1>
+        <div
+            id="clock"
+            class="clock">
 
+            00:00:00
 
-    <!-- CREATOR -->
-
-    <div class="creator">
-
-        Created by
-        <strong>
-            Aashin Hamdhan
-        </strong>
-        ✨
-
-    </div>
-
-
-    <!-- SUBTITLE -->
-
-    <div class="subtitle">
-
-        Your intelligent
-        voice-powered music assistant
+        </div>
 
     </div>
 
 
 
-    <!-- =================================================
+    <!-- BRAND -->
+
+    <div class="brand">
+
+        <small>
+            INTELLIGENT VOICE ASSISTANT
+        </small>
+
+        <h1>
+            NOVA AI
+        </h1>
+
+        <div class="creator">
+
+            Created by
+
+            <strong>
+                Aashin Hamdhan
+            </strong>
+
+            ✨
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
          AI CORE
-    ================================================== -->
+    ====================================================== -->
 
-    <div class="ai-core">
+    <div class="ai">
 
-        <div class="core-ring"></div>
+        <div class="ring ring1"></div>
 
-        <div class="core-ring-two"></div>
+        <div class="ring ring2"></div>
+
+        <div class="ring ring3"></div>
+
+
+        <div class="energy">
+
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+
+        </div>
+
 
         <div class="core-glow"></div>
 
@@ -1224,27 +1148,42 @@ h1{
         id="status"
         class="status">
 
-        Tap the microphone
-        to speak
+        Tap the core and say a song
 
     </div>
 
 
 
-    <!-- =================================================
-         SONG CARD
-    ================================================== -->
+    <!-- VISUALIZER -->
 
-    <div class="song-card">
+    <div class="visualizer">
 
-        <div class="music-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+
+    <!-- NOW PLAYING -->
+
+    <div class="now-playing">
+
+        <div class="album">
             🎵
         </div>
 
 
-        <div class="song-info">
+        <div class="track-info">
 
-            <div class="song-label">
+            <div class="track-label">
                 Now Playing
             </div>
 
@@ -1262,33 +1201,12 @@ h1{
 
 
 
-    <!-- =================================================
-         WAVEFORM
-    ================================================== -->
-
-    <div class="wave">
-
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-
-    </div>
-
-
-
     <!-- FOOTER -->
 
     <div class="footer">
 
         Designed & Created by
+
         <strong>
             Aashin Hamdhan
         </strong>
@@ -1302,9 +1220,9 @@ h1{
 
 <script>
 
-/* =====================================================
+/* =========================================================
    ELEMENTS
-===================================================== */
+========================================================= */
 
 const mic =
     document.getElementById("mic");
@@ -1315,10 +1233,41 @@ const status =
 const song =
     document.getElementById("song");
 
+const clock =
+    document.getElementById("clock");
 
-/* =====================================================
+
+/* =========================================================
+   LIVE CLOCK
+========================================================= */
+
+function updateClock(){
+
+    const now =
+        new Date();
+
+    clock.textContent =
+        now.toLocaleTimeString(
+            [],
+            {
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit"
+            }
+        );
+}
+
+updateClock();
+
+setInterval(
+    updateClock,
+    1000
+);
+
+
+/* =========================================================
    SPEECH RECOGNITION
-===================================================== */
+========================================================= */
 
 const SpeechRecognition =
     window.SpeechRecognition ||
@@ -1331,23 +1280,23 @@ let listening = false;
 
 
 
-/* =====================================================
+/* =========================================================
    BROWSER SUPPORT
-===================================================== */
+========================================================= */
 
 if(!SpeechRecognition){
 
     status.textContent =
-        "⚠️ Speech recognition unavailable";
+        "⚠️ Speech recognition is not supported";
 
     mic.disabled = true;
 
 }
 
 
-/* =====================================================
-   SETUP
-===================================================== */
+/* =========================================================
+   RECOGNITION
+========================================================= */
 
 else{
 
@@ -1368,9 +1317,9 @@ else{
 
 
 
-    /* =================================================
-       LISTENING START
-    ================================================= */
+    /* =====================================================
+       START LISTENING
+    ====================================================== */
 
     recognition.onstart = () => {
 
@@ -1384,15 +1333,15 @@ else{
             "🎧 Nova is listening...";
 
         song.textContent =
-            "Waiting for song name...";
+            "Listening for a song name...";
 
     };
 
 
 
-    /* =================================================
-       LISTENING END
-    ================================================= */
+    /* =====================================================
+       END LISTENING
+    ====================================================== */
 
     recognition.onend = () => {
 
@@ -1406,15 +1355,15 @@ else{
 
 
 
-    /* =================================================
-       SPEECH ERROR
-    ================================================= */
+    /* =====================================================
+       ERROR
+    ====================================================== */
 
     recognition.onerror =
         (event) => {
 
         console.error(
-            "Speech recognition error:",
+            "Speech recognition:",
             event.error
         );
 
@@ -1426,7 +1375,10 @@ else{
         );
 
 
-        if(event.error === "not-allowed"){
+        if(
+            event.error ===
+            "not-allowed"
+        ){
 
             status.textContent =
                 "🎙️ Microphone permission denied";
@@ -1436,7 +1388,7 @@ else{
         else{
 
             status.textContent =
-                "⚠️ Couldn't hear you. Try again";
+                "⚠️ I couldn't hear you. Try again";
 
         }
 
@@ -1448,23 +1400,20 @@ else{
 
 
 
-    /* =================================================
-       SPEECH RESULT
-    ================================================= */
+    /* =====================================================
+       RESULT
+    ====================================================== */
 
     recognition.onresult =
         async (event) => {
 
 
         const command =
-            event.results[0][0]
+            event
+            .results[0][0]
             .transcript
             .trim();
 
-
-        /* ---------------------------------------------
-           EMPTY COMMAND
-        --------------------------------------------- */
 
         if(!command){
 
@@ -1476,33 +1425,29 @@ else{
         }
 
 
-        /* ---------------------------------------------
-           DISPLAY SONG
-        --------------------------------------------- */
+        /* Show recognized song */
 
         song.textContent =
             command;
 
 
         status.textContent =
-            "🔎 Nova is finding your song...";
+            "🔎 Nova is searching...";
 
-
-
-        /* ---------------------------------------------
-           SEND TO FLASK
-        --------------------------------------------- */
 
         try{
 
+
+            /* =============================================
+               SEND TO YOUR FLASK SERVER
+            ============================================== */
 
             const response =
                 await fetch(
                     "/youtube/play",
                     {
 
-                        method:
-                            "POST",
+                        method:"POST",
 
                         headers:{
                             "Content-Type":
@@ -1521,19 +1466,13 @@ else{
                 );
 
 
-
-            /* -----------------------------------------
-               SERVER RESPONSE
-            ----------------------------------------- */
-
             const data =
                 await response.json();
 
 
-
-            /* -----------------------------------------
-               SONG NOT FOUND
-            ----------------------------------------- */
+            /* =============================================
+               FAILURE
+            ============================================== */
 
             if(!data.success){
 
@@ -1546,10 +1485,9 @@ else{
             }
 
 
-
-            /* -----------------------------------------
+            /* =============================================
                OPEN YOUTUBE
-            ----------------------------------------- */
+            ============================================== */
 
             if(
                 !youtubeTab ||
@@ -1558,11 +1496,8 @@ else{
 
                 youtubeTab =
                     window.open(
-
                         data.url,
-
                         "NovaYouTube"
-
                     );
 
             }
@@ -1577,10 +1512,9 @@ else{
             }
 
 
-
-            /* -----------------------------------------
-               PLAYING
-            ----------------------------------------- */
+            /* =============================================
+               SUCCESS
+            ============================================== */
 
             status.textContent =
                 "▶️ Playing on YouTube";
@@ -1588,15 +1522,9 @@ else{
         }
 
 
-
-        /* ---------------------------------------------
-           CONNECTION ERROR
-        --------------------------------------------- */
-
         catch(error){
 
             console.error(
-                "Server error:",
                 error
             );
 
@@ -1610,18 +1538,14 @@ else{
 
 
 
-    /* =================================================
-       MICROPHONE BUTTON
-    ================================================= */
+    /* =====================================================
+       MICROPHONE CLICK
+    ====================================================== */
 
     mic.onclick = () => {
 
-
-        if(listening){
-
+        if(listening)
             return;
-
-        }
 
 
         try{
@@ -1633,7 +1557,7 @@ else{
         catch(error){
 
             console.log(
-                "Recognition start error:",
+                "Recognition error:",
                 error
             );
 
@@ -1643,9 +1567,9 @@ else{
 
 
 
-    /* =================================================
+    /* =====================================================
        SPACEBAR SHORTCUT
-    ================================================= */
+    ====================================================== */
 
     document.addEventListener(
         "keydown",
@@ -1653,24 +1577,21 @@ else{
 
             if(
                 event.code === "Space" &&
-                event.target.tagName !== "INPUT"
+                event.target.tagName !== "INPUT" &&
+                !listening
             ){
 
                 event.preventDefault();
 
-                if(!listening){
+                try{
 
-                    try{
+                    recognition.start();
 
-                        recognition.start();
+                }
 
-                    }
+                catch(error){
 
-                    catch(error){
-
-                        console.log(error);
-
-                    }
+                    console.log(error);
 
                 }
 
