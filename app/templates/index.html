@@ -9,32 +9,37 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>Nova AI</title>
+<title>Nova AI — Aashin Hamdhan</title>
 
 
 <style>
 
-/* =========================================
-   GLOBAL
-========================================= */
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 }
 
-body{
 
-    margin:0;
+/* =====================================================
+   BODY
+===================================================== */
+
+body{
 
     min-height:100vh;
 
-    display:flex;
+    overflow:hidden;
 
-    justify-content:center;
+    display:flex;
 
     align-items:center;
 
-    overflow:hidden;
+    justify-content:center;
 
     font-family:
         Arial,
@@ -45,71 +50,89 @@ body{
 
     background:
         radial-gradient(
-            circle at 20% 20%,
-            #34206d 0%,
+            circle at 15% 20%,
+            rgba(124,58,237,.30),
             transparent 30%
         ),
 
         radial-gradient(
-            circle at 80% 80%,
-            #123b68 0%,
+            circle at 85% 80%,
+            rgba(6,182,212,.25),
             transparent 30%
         ),
 
-        #07070b;
+        radial-gradient(
+            circle at 50% 50%,
+            #151027,
+            #050509 70%
+        );
 }
 
 
-/* =========================================
-   BACKGROUND GLOW
-========================================= */
+/* =====================================================
+   BACKGROUND ORBS
+===================================================== */
 
-body::before,
-body::after{
-
-    content:"";
+.bg-orb{
 
     position:absolute;
 
-    width:350px;
-    height:350px;
-
     border-radius:50%;
 
-    filter:blur(100px);
+    filter:blur(80px);
 
-    opacity:.35;
+    pointer-events:none;
+
+    opacity:.4;
 
     animation:
-        float 8s ease-in-out infinite alternate;
+        orbFloat 8s ease-in-out infinite alternate;
 }
 
 
-body::before{
+.orb-one{
+
+    width:250px;
+    height:250px;
 
     background:#7c3aed;
 
-    top:-120px;
-
-    left:-100px;
+    top:-80px;
+    left:-80px;
 }
 
 
-body::after{
+.orb-two{
+
+    width:220px;
+    height:220px;
 
     background:#06b6d4;
 
-    bottom:-150px;
-
-    right:-100px;
+    bottom:-70px;
+    right:-60px;
 
     animation-delay:2s;
 }
 
 
-@keyframes float{
+.orb-three{
 
-    from{
+    width:140px;
+    height:140px;
+
+    background:#ec4899;
+
+    top:45%;
+    right:5%;
+
+    animation-delay:4s;
+}
+
+
+@keyframes orbFloat{
+
+    0%{
 
         transform:
             translate(0,0)
@@ -117,10 +140,10 @@ body::after{
 
     }
 
-    to{
+    100%{
 
         transform:
-            translate(60px,40px)
+            translate(50px,-30px)
             scale(1.2);
 
     }
@@ -128,59 +151,186 @@ body::after{
 }
 
 
-/* =========================================
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+.particles{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+}
+
+
+.particles span{
+
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    opacity:.5;
+
+    animation:
+        particleMove
+        linear
+        infinite;
+}
+
+
+.particles span:nth-child(1){
+    left:10%;
+    top:80%;
+    animation-duration:8s;
+}
+
+.particles span:nth-child(2){
+    left:20%;
+    top:60%;
+    animation-duration:11s;
+}
+
+.particles span:nth-child(3){
+    left:35%;
+    top:90%;
+    animation-duration:9s;
+}
+
+.particles span:nth-child(4){
+    left:50%;
+    top:70%;
+    animation-duration:13s;
+}
+
+.particles span:nth-child(5){
+    left:65%;
+    top:85%;
+    animation-duration:10s;
+}
+
+.particles span:nth-child(6){
+    left:80%;
+    top:60%;
+    animation-duration:12s;
+}
+
+.particles span:nth-child(7){
+    left:90%;
+    top:85%;
+    animation-duration:9s;
+}
+
+.particles span:nth-child(8){
+    left:45%;
+    top:50%;
+    animation-duration:15s;
+}
+
+
+@keyframes particleMove{
+
+    0%{
+
+        transform:
+            translateY(100px);
+
+        opacity:0;
+
+    }
+
+    20%{
+
+        opacity:.6;
+
+    }
+
+    80%{
+
+        opacity:.6;
+
+    }
+
+    100%{
+
+        transform:
+            translateY(-700px);
+
+        opacity:0;
+
+    }
+
+}
+
+
+/* =====================================================
    MAIN CARD
-========================================= */
+===================================================== */
 
 .card{
 
     position:relative;
 
-    z-index:2;
+    z-index:10;
 
-    width:min(420px,90%);
+    width:
+        min(450px,92%);
 
-    padding:42px 32px;
+    padding:
+        40px 30px 30px;
 
     text-align:center;
 
+    border-radius:32px;
+
     background:
-        rgba(20,20,28,.72);
+        linear-gradient(
+            145deg,
+            rgba(30,27,50,.85),
+            rgba(10,10,18,.80)
+        );
 
     border:
         1px solid
-        rgba(255,255,255,.12);
-
-    border-radius:30px;
+        rgba(255,255,255,.13);
 
     backdrop-filter:
-        blur(25px);
+        blur(30px);
 
     -webkit-backdrop-filter:
-        blur(25px);
+        blur(30px);
 
     box-shadow:
 
-        0 30px 80px
-        rgba(0,0,0,.55),
+        0 30px 100px
+        rgba(0,0,0,.65),
 
-        inset 0 1px
+        inset
+        0 1px
         rgba(255,255,255,.08);
 
     animation:
-        cardAppear .8s ease;
+        cardIn .9s ease;
 }
 
 
-@keyframes cardAppear{
+@keyframes cardIn{
 
     from{
 
         opacity:0;
 
         transform:
-            translateY(30px)
-            scale(.95);
+            translateY(40px)
+            scale(.92);
 
     }
 
@@ -197,15 +347,81 @@ body::after{
 }
 
 
-/* =========================================
+/* =====================================================
+   TOP LABEL
+===================================================== */
+
+.top-label{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:
+        7px 13px;
+
+    margin-bottom:18px;
+
+    border-radius:30px;
+
+    font-size:11px;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    color:#c4b5fd;
+
+    background:
+        rgba(139,92,246,.10);
+
+    border:
+        1px solid
+        rgba(139,92,246,.20);
+}
+
+
+.top-dot{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+        0 0 10px
+        #22c55e;
+
+    animation:
+        blink 1.5s infinite;
+}
+
+
+@keyframes blink{
+
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.3;
+    }
+
+}
+
+
+/* =====================================================
    LOGO
-========================================= */
+===================================================== */
 
 .logo{
 
-    width:70px;
-
-    height:70px;
+    width:78px;
+    height:78px;
 
     margin:
         0 auto 18px;
@@ -213,63 +429,71 @@ body::after{
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
-    border-radius:22px;
+    border-radius:24px;
 
-    font-size:32px;
+    font-size:36px;
 
     background:
         linear-gradient(
             135deg,
             #7c3aed,
+            #6366f1,
             #06b6d4
         );
 
     box-shadow:
-        0 0 35px
-        rgba(124,58,237,.45);
+
+        0 0 25px
+        rgba(124,58,237,.45),
+
+        0 0 60px
+        rgba(6,182,212,.15);
 
     animation:
-        logoGlow 3s infinite alternate;
+        logoPulse 3s ease-in-out infinite;
 }
 
 
-@keyframes logoGlow{
+@keyframes logoPulse{
 
-    from{
+    0%,100%{
+
+        transform:
+            translateY(0);
 
         box-shadow:
-            0 0 20px
-            rgba(124,58,237,.35);
+            0 0 25px
+            rgba(124,58,237,.45);
 
     }
 
-    to{
+    50%{
+
+        transform:
+            translateY(-5px);
 
         box-shadow:
-            0 0 45px
-            rgba(6,182,212,.55);
+            0 0 50px
+            rgba(6,182,212,.5);
 
     }
 
 }
 
 
-/* =========================================
+/* =====================================================
    TITLE
-========================================= */
+===================================================== */
 
 h1{
 
-    margin:0;
+    font-size:38px;
 
-    font-size:34px;
+    letter-spacing:-1.5px;
 
-    font-weight:700;
-
-    letter-spacing:-1px;
+    font-weight:800;
 
     background:
         linear-gradient(
@@ -286,28 +510,25 @@ h1{
 }
 
 
-/* =========================================
-   USER NAME
-========================================= */
+/* =====================================================
+   CREATED BY
+===================================================== */
 
-.user-name{
+.creator{
 
-    margin-top:10px;
+    margin-top:9px;
 
-    font-size:16px;
+    font-size:14px;
 
-    color:#d1d5db;
-
-    animation:
-        nameAppear 1.2s ease;
+    color:#9ca3af;
 }
 
 
-.user-name span{
+.creator strong{
 
     color:#67e8f9;
 
-    font-weight:bold;
+    font-weight:700;
 
     text-shadow:
         0 0 15px
@@ -315,58 +536,36 @@ h1{
 }
 
 
-@keyframes nameAppear{
-
-    from{
-
-        opacity:0;
-
-        transform:
-            translateY(10px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
-
-/* =========================================
+/* =====================================================
    SUBTITLE
-========================================= */
+===================================================== */
 
 .subtitle{
 
     margin:
-        10px 0 30px;
+        10px 0 25px;
 
-    color:#9ca3af;
+    font-size:13px;
 
-    font-size:14px;
+    color:#6b7280;
+
+    letter-spacing:.3px;
 }
 
 
-/* =========================================
-   MICROPHONE AREA
-========================================= */
+/* =====================================================
+   AI CORE
+===================================================== */
 
-.mic-wrapper{
+.ai-core{
 
     position:relative;
 
-    width:160px;
-
-    height:160px;
+    width:200px;
+    height:200px;
 
     margin:
-        0 auto 25px;
+        0 auto 20px;
 
     display:flex;
 
@@ -376,81 +575,131 @@ h1{
 }
 
 
-/* =========================================
-   ANIMATED RINGS
-========================================= */
+/* Outer rotating ring */
 
-.ring{
+.core-ring{
 
     position:absolute;
 
-    width:145px;
-
-    height:145px;
+    width:190px;
+    height:190px;
 
     border-radius:50%;
 
     border:
         1px solid
-        rgba(139,92,246,.3);
+        rgba(139,92,246,.30);
+
+    border-top-color:
+        #8b5cf6;
+
+    border-right-color:
+        #06b6d4;
 
     animation:
-        pulse 3s infinite;
+        rotate 5s linear infinite;
 }
 
 
-.ring:nth-child(2){
+.core-ring-two{
 
-    width:125px;
+    position:absolute;
 
-    height:125px;
+    width:165px;
+    height:165px;
 
-    animation-delay:1s;
+    border-radius:50%;
+
+    border:
+        1px dashed
+        rgba(103,232,249,.35);
+
+    animation:
+        rotateReverse 8s linear infinite;
 }
 
 
-@keyframes pulse{
+@keyframes rotate{
 
-    0%{
-
+    to{
         transform:
-            scale(.85);
-
-        opacity:.8;
-    }
-
-    100%{
-
-        transform:
-            scale(1.35);
-
-        opacity:0;
+            rotate(360deg);
     }
 
 }
 
 
-/* =========================================
-   MICROPHONE BUTTON
-========================================= */
+@keyframes rotateReverse{
+
+    to{
+        transform:
+            rotate(-360deg);
+    }
+
+}
+
+
+/* =====================================================
+   CORE GLOW
+===================================================== */
+
+.core-glow{
+
+    position:absolute;
+
+    width:135px;
+    height:135px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(139,92,246,.40),
+            rgba(6,182,212,.12),
+            transparent 70%
+        );
+
+    filter:blur(8px);
+
+    animation:
+        coreGlow 2s ease-in-out infinite alternate;
+}
+
+
+@keyframes coreGlow{
+
+    from{
+        transform:scale(.9);
+    }
+
+    to{
+        transform:scale(1.15);
+    }
+
+}
+
+
+/* =====================================================
+   MICROPHONE
+===================================================== */
 
 .mic{
 
     position:relative;
 
-    z-index:3;
+    z-index:5;
 
-    width:100px;
+    width:105px;
+    height:105px;
 
-    height:100px;
-
-    border:0;
+    border:none;
 
     border-radius:50%;
 
     cursor:pointer;
 
-    font-size:38px;
+    font-size:40px;
 
     color:white;
 
@@ -463,11 +712,17 @@ h1{
         );
 
     box-shadow:
+
         0 10px 35px
-        rgba(99,102,241,.5);
+        rgba(99,102,241,.45),
+
+        inset
+        0 1px
+        rgba(255,255,255,.25);
 
     transition:
-        .3s;
+        transform .25s,
+        box-shadow .25s;
 }
 
 
@@ -477,15 +732,19 @@ h1{
         scale(1.08);
 
     box-shadow:
-        0 15px 50px
-        rgba(99,102,241,.7);
+
+        0 15px 55px
+        rgba(99,102,241,.75),
+
+        0 0 30px
+        rgba(6,182,212,.35);
 }
 
 
 .mic:active{
 
     transform:
-        scale(.95);
+        scale(.94);
 }
 
 
@@ -498,14 +757,16 @@ h1{
 }
 
 
-/* =========================================
-   LISTENING STATE
-========================================= */
+/* =====================================================
+   LISTENING
+===================================================== */
 
 .listening{
 
     animation:
-        micPulse 1s infinite alternate;
+        listeningPulse
+        .8s ease-in-out
+        infinite alternate;
 
     box-shadow:
 
@@ -513,14 +774,14 @@ h1{
         rgba(139,92,246,.15),
 
         0 0 0 25px
-        rgba(6,182,212,.08),
+        rgba(6,182,212,.10),
 
-        0 0 50px
-        rgba(139,92,246,.8);
+        0 0 70px
+        rgba(139,92,246,.9);
 }
 
 
-@keyframes micPulse{
+@keyframes listeningPulse{
 
     from{
 
@@ -532,57 +793,127 @@ h1{
     to{
 
         transform:
-            scale(1.12);
+            scale(1.13);
 
     }
 
 }
 
 
-/* =========================================
+/* =====================================================
    STATUS
-========================================= */
+===================================================== */
 
 .status{
 
-    min-height:24px;
-
-    margin-top:10px;
-
-    color:#d1d5db;
+    min-height:25px;
 
     font-size:15px;
+
+    color:#d1d5db;
 
     transition:
         .3s;
 }
 
 
-/* =========================================
-   SONG DISPLAY
-========================================= */
+/* =====================================================
+   SONG CARD
+===================================================== */
 
-.song-box{
+.song-card{
 
-    margin-top:22px;
+    margin-top:20px;
 
     padding:
-        14px 18px;
+        15px 17px;
 
-    border-radius:15px;
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    text-align:left;
+
+    border-radius:18px;
 
     background:
-        rgba(255,255,255,.05);
+        rgba(255,255,255,.045);
 
     border:
         1px solid
+        rgba(255,255,255,.08);
+
+    box-shadow:
+        inset 0 1px
+        rgba(255,255,255,.03);
+
+    transition:
+        .3s;
+}
+
+
+.song-card:hover{
+
+    background:
         rgba(255,255,255,.07);
 
-    color:#c4b5fd;
+    transform:
+        translateY(-2px);
+}
+
+
+.music-icon{
+
+    width:42px;
+    height:42px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    font-size:19px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,58,237,.35),
+            rgba(6,182,212,.25)
+        );
+}
+
+
+.song-info{
+
+    min-width:0;
+}
+
+
+.song-label{
+
+    font-size:10px;
+
+    color:#6b7280;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    margin-bottom:4px;
+}
+
+
+.song{
+
+    color:#e5e7eb;
 
     font-size:14px;
-
-    min-height:20px;
 
     overflow:hidden;
 
@@ -592,33 +923,33 @@ h1{
 }
 
 
-/* =========================================
+/* =====================================================
    WAVEFORM
-========================================= */
+===================================================== */
 
 .wave{
 
-    display:flex;
+    height:38px;
 
-    justify-content:center;
+    display:flex;
 
     align-items:center;
 
-    gap:5px;
+    justify-content:center;
 
-    height:35px;
+    gap:4px;
 
-    margin-top:20px;
+    margin-top:18px;
 
-    opacity:.35;
+    opacity:.45;
 }
 
 
 .wave span{
 
-    width:4px;
+    width:3px;
 
-    height:10px;
+    height:8px;
 
     border-radius:10px;
 
@@ -629,7 +960,9 @@ h1{
         );
 
     animation:
-        wave 1s ease-in-out infinite;
+        wave 1s
+        ease-in-out
+        infinite;
 }
 
 
@@ -650,14 +983,22 @@ h1{
 }
 
 .wave span:nth-child(6){
-    animation-delay:.3s;
+    animation-delay:.5s;
 }
 
 .wave span:nth-child(7){
-    animation-delay:.2s;
+    animation-delay:.4s;
 }
 
 .wave span:nth-child(8){
+    animation-delay:.3s;
+}
+
+.wave span:nth-child(9){
+    animation-delay:.2s;
+}
+
+.wave span:nth-child(10){
     animation-delay:.1s;
 }
 
@@ -666,65 +1007,94 @@ h1{
 
     0%,100%{
 
-        height:8px;
+        height:7px;
 
     }
 
     50%{
 
-        height:30px;
+        height:32px;
 
     }
 
 }
 
 
-/* =========================================
+/* =====================================================
    FOOTER
-========================================= */
+===================================================== */
 
 .footer{
 
-    margin-top:25px;
+    margin-top:22px;
+
+    padding-top:17px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.06);
+
+    color:#555b68;
 
     font-size:11px;
-
-    color:#6b7280;
 }
 
 
-.footer span{
+.footer strong{
 
     color:#8b5cf6;
 }
 
 
-/* =========================================
+/* =====================================================
    MOBILE
-========================================= */
+===================================================== */
 
 @media(max-width:500px){
 
     .card{
 
         padding:
-            35px 22px;
+            30px 20px 25px;
 
     }
+
 
     h1{
 
-        font-size:30px;
+        font-size:32px;
 
     }
 
-    .logo{
 
-        width:60px;
+    .ai-core{
 
-        height:60px;
+        width:175px;
+        height:175px;
 
-        font-size:28px;
+    }
+
+
+    .core-ring{
+
+        width:170px;
+        height:170px;
+
+    }
+
+
+    .core-ring-two{
+
+        width:145px;
+        height:145px;
+
+    }
+
+
+    .mic{
+
+        width:95px;
+        height:95px;
 
     }
 
@@ -738,17 +1108,56 @@ h1{
 <body>
 
 
-<!-- =====================================
-     NOVA AI CARD
-===================================== -->
+<!-- =================================================
+     BACKGROUND
+================================================== -->
+
+<div class="bg-orb orb-one"></div>
+
+<div class="bg-orb orb-two"></div>
+
+<div class="bg-orb orb-three"></div>
+
+
+<div class="particles">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+
+
+<!-- =================================================
+     MAIN NOVA AI
+================================================== -->
 
 <div class="card">
+
+
+    <!-- ONLINE LABEL -->
+
+    <div class="top-label">
+
+        <span class="top-dot"></span>
+
+        NOVA SYSTEM ONLINE
+
+    </div>
 
 
     <!-- LOGO -->
 
     <div class="logo">
+
         ✨
+
     </div>
 
 
@@ -759,15 +1168,15 @@ h1{
     </h1>
 
 
-    <!-- USER NAME -->
+    <!-- CREATOR -->
 
-    <div class="user-name">
+    <div class="creator">
 
-        Welcome,
-        <span>
+        Created by
+        <strong>
             Aashin Hamdhan
-        </span>
-        👋
+        </strong>
+        ✨
 
     </div>
 
@@ -776,30 +1185,37 @@ h1{
 
     <div class="subtitle">
 
-        Your voice-powered
-        music assistant
+        Your intelligent
+        voice-powered music assistant
 
     </div>
 
 
-    <!-- MICROPHONE -->
 
-    <div class="mic-wrapper">
+    <!-- =================================================
+         AI CORE
+    ================================================== -->
 
-        <div class="ring"></div>
+    <div class="ai-core">
 
-        <div class="ring"></div>
+        <div class="core-ring"></div>
+
+        <div class="core-ring-two"></div>
+
+        <div class="core-glow"></div>
+
 
         <button
             id="mic"
             class="mic"
-            aria-label="Start voice recognition">
+            aria-label="Activate Nova AI">
 
             🎙️
 
         </button>
 
     </div>
+
 
 
     <!-- STATUS -->
@@ -809,51 +1225,73 @@ h1{
         class="status">
 
         Tap the microphone
-        and say a song
+        to speak
 
     </div>
 
 
-    <!-- SONG -->
 
-    <div
-        id="song"
-        class="song-box">
+    <!-- =================================================
+         SONG CARD
+    ================================================== -->
 
-        No song selected
+    <div class="song-card">
+
+        <div class="music-icon">
+            🎵
+        </div>
+
+
+        <div class="song-info">
+
+            <div class="song-label">
+                Now Playing
+            </div>
+
+            <div
+                id="song"
+                class="song">
+
+                No song selected
+
+            </div>
+
+        </div>
 
     </div>
 
 
-    <!-- WAVEFORM -->
+
+    <!-- =================================================
+         WAVEFORM
+    ================================================== -->
 
     <div class="wave">
 
         <span></span>
-
+        <span></span>
+        <span></span>
+        <span></span>
         <span></span>
 
         <span></span>
-
         <span></span>
-
         <span></span>
-
         <span></span>
-
-        <span></span>
-
         <span></span>
 
     </div>
+
 
 
     <!-- FOOTER -->
 
     <div class="footer">
 
-        Powered by
-        <span>Nova AI</span>
+        Designed & Created by
+        <strong>
+            Aashin Hamdhan
+        </strong>
 
     </div>
 
@@ -864,9 +1302,9 @@ h1{
 
 <script>
 
-/* =========================================
+/* =====================================================
    ELEMENTS
-========================================= */
+===================================================== */
 
 const mic =
     document.getElementById("mic");
@@ -878,9 +1316,9 @@ const song =
     document.getElementById("song");
 
 
-/* =========================================
+/* =====================================================
    SPEECH RECOGNITION
-========================================= */
+===================================================== */
 
 const SpeechRecognition =
     window.SpeechRecognition ||
@@ -893,23 +1331,23 @@ let listening = false;
 
 
 
-/* =========================================
-   CHECK BROWSER SUPPORT
-========================================= */
+/* =====================================================
+   BROWSER SUPPORT
+===================================================== */
 
 if(!SpeechRecognition){
 
     status.textContent =
-        "Speech recognition unavailable";
+        "⚠️ Speech recognition unavailable";
 
     mic.disabled = true;
 
 }
 
 
-/* =========================================
-   SPEECH RECOGNITION SETUP
-========================================= */
+/* =====================================================
+   SETUP
+===================================================== */
 
 else{
 
@@ -929,9 +1367,10 @@ else{
         false;
 
 
-    /* =====================================
-       START
-    ===================================== */
+
+    /* =================================================
+       LISTENING START
+    ================================================= */
 
     recognition.onstart = () => {
 
@@ -942,17 +1381,18 @@ else{
         );
 
         status.textContent =
-            "🎧 Listening...";
+            "🎧 Nova is listening...";
 
         song.textContent =
-            "Speak the song name";
+            "Waiting for song name...";
 
     };
 
 
-    /* =====================================
-       END
-    ===================================== */
+
+    /* =================================================
+       LISTENING END
+    ================================================= */
 
     recognition.onend = () => {
 
@@ -965,15 +1405,16 @@ else{
     };
 
 
-    /* =====================================
-       ERROR
-    ===================================== */
+
+    /* =================================================
+       SPEECH ERROR
+    ================================================= */
 
     recognition.onerror =
         (event) => {
 
         console.error(
-            "Speech error:",
+            "Speech recognition error:",
             event.error
         );
 
@@ -985,8 +1426,20 @@ else{
         );
 
 
-        status.textContent =
-            "⚠️ Try again";
+        if(event.error === "not-allowed"){
+
+            status.textContent =
+                "🎙️ Microphone permission denied";
+
+        }
+
+        else{
+
+            status.textContent =
+                "⚠️ Couldn't hear you. Try again";
+
+        }
+
 
         song.textContent =
             "No song selected";
@@ -994,9 +1447,10 @@ else{
     };
 
 
-    /* =====================================
-       RESULT
-    ===================================== */
+
+    /* =================================================
+       SPEECH RESULT
+    ================================================= */
 
     recognition.onresult =
         async (event) => {
@@ -1008,9 +1462,9 @@ else{
             .trim();
 
 
-        /* ================================
-           EMPTY RESULT
-        ================================= */
+        /* ---------------------------------------------
+           EMPTY COMMAND
+        --------------------------------------------- */
 
         if(!command){
 
@@ -1022,21 +1476,22 @@ else{
         }
 
 
-        /* ================================
-           SHOW SONG
-        ================================= */
+        /* ---------------------------------------------
+           DISPLAY SONG
+        --------------------------------------------- */
 
         song.textContent =
-            "🎵 " + command;
+            command;
 
 
         status.textContent =
-            "🔎 Finding song...";
+            "🔎 Nova is finding your song...";
 
 
-        /* ================================
+
+        /* ---------------------------------------------
            SEND TO FLASK
-        ================================= */
+        --------------------------------------------- */
 
         try{
 
@@ -1066,32 +1521,35 @@ else{
                 );
 
 
-            /* ============================
-               CHECK RESPONSE
-            ============================ */
+
+            /* -----------------------------------------
+               SERVER RESPONSE
+            ----------------------------------------- */
 
             const data =
                 await response.json();
 
 
-            /* ============================
+
+            /* -----------------------------------------
                SONG NOT FOUND
-            ============================ */
+            ----------------------------------------- */
 
             if(!data.success){
 
                 status.textContent =
                     data.message ||
-                    "Song not found";
+                    "❌ Song not found";
 
                 return;
 
             }
 
 
-            /* ============================
+
+            /* -----------------------------------------
                OPEN YOUTUBE
-            ============================ */
+            ----------------------------------------- */
 
             if(
                 !youtubeTab ||
@@ -1119,24 +1577,26 @@ else{
             }
 
 
-            /* ============================
+
+            /* -----------------------------------------
                PLAYING
-            ============================ */
+            ----------------------------------------- */
 
             status.textContent =
                 "▶️ Playing on YouTube";
 
-
         }
 
 
-        /* ================================
-           SERVER ERROR
-        ================================= */
+
+        /* ---------------------------------------------
+           CONNECTION ERROR
+        --------------------------------------------- */
 
         catch(error){
 
             console.error(
+                "Server error:",
                 error
             );
 
@@ -1149,9 +1609,10 @@ else{
     };
 
 
-    /* =====================================
+
+    /* =================================================
        MICROPHONE BUTTON
-    ===================================== */
+    ================================================= */
 
     mic.onclick = () => {
 
@@ -1172,12 +1633,51 @@ else{
         catch(error){
 
             console.log(
+                "Recognition start error:",
                 error
             );
 
         }
 
     };
+
+
+
+    /* =================================================
+       SPACEBAR SHORTCUT
+    ================================================= */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if(
+                event.code === "Space" &&
+                event.target.tagName !== "INPUT"
+            ){
+
+                event.preventDefault();
+
+                if(!listening){
+
+                    try{
+
+                        recognition.start();
+
+                    }
+
+                    catch(error){
+
+                        console.log(error);
+
+                    }
+
+                }
+
+            }
+
+        }
+    );
 
 }
 
